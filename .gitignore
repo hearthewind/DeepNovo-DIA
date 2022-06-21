@@ -2,7 +2,7 @@
 *.c
 /build
 /train
-knapsack.npy
+*.npy
 __pycache__
 .ipynb_checkpoints/
 .project
