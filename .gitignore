@@ -1,0 +1,9 @@
+*.so
+*.c
+/build
+/train
+knapsack.npy
+__pycache__
+.ipynb_checkpoints/
+.project
+.pydevproject

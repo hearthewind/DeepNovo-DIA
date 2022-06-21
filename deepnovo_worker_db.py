@@ -51,7 +51,7 @@ class WorkerDB(object):
     self.var_mod_list = deepnovo_config.var_mod_list
     self.num_mod = deepnovo_config.num_mod
     self.precursor_mass_tolerance = deepnovo_config.precursor_mass_tolerance
-    self.precursor_mass_ppm = deepnovo_config.precursor_mass_ppm
+    self.precursor_mass_ppm = deepnovo_config.precursor_mass_ppm #TODO(m) what is this
     self.decoy = deepnovo_config.FLAGS.decoy
     print("db_fasta_file = {0:s}".format(self.db_fasta_file))
     print("cleavage_rule = {0:s}".format(self.cleavage_rule))
@@ -109,7 +109,7 @@ class WorkerDB(object):
 
     peptide_list = [list(peptide) for peptide in peptide_2_protein_id.keys()]
     peptide_list = [[x + 'mod' if x in self.fixed_mod_list else x for x in peptide] for peptide in peptide_list ]
-
+    #TODO(m) will this cause x + 'mod' to be absent from mass_AA
     peptide_count = len(peptide_list)
     print("Number of peptides: {0:d}".format(peptide_count))
 
@@ -202,7 +202,7 @@ class WorkerDB(object):
 
     # all possible positions for modification
     position_list = [position for position, aa in enumerate(peptide)
-                     if aa in self.var_mod_list]
+                     if aa in self.var_mod_list] #TODO(m) what is fixed modification and what is variable
     position_count = len(position_list)
     # max number of modifications allowed
     num_mod = min(position_count, self.num_mod)

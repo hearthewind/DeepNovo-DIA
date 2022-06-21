@@ -330,7 +330,7 @@ class WorkerDenovo(object):
           if len(AAid_list) > 1:
             AAid_1 = AAid_list[-2]
           else:
-            AAid_1 = AAid_2 # nobi
+            AAid_1 = AAid_2 # nobi #TODO(m) what does nobi mean
 
           # the current status of this path
           prefix_mass = path["prefix_mass"]
@@ -629,7 +629,7 @@ class WorkerDenovo(object):
     argmax_mass_complement_batch = []
     for spectrum in spectrum_batch:
       precursor_mass = spectrum["precursor_mass"]
-      precursor_mass_C = precursor_mass - mass_EOS
+      precursor_mass_C = precursor_mass - mass_EOS #TODO(m) what is precursor_mass_C
       precursor_mass_C_location = int(round(precursor_mass_C
                                           * self.SPECTRUM_RESOLUTION))
       spectrum_forward = spectrum["spectrum_original_forward"]

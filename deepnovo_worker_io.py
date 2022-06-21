@@ -214,7 +214,7 @@ class WorkerIO(object):
     """TODO(nh2tran): docstring."""
 
     print("".join(["="] * 80)) # section-separating line
-    print("WorkerIO: split_index()")
+    print("WorkerIO: split_feature_index()")
 
     index_batch_list = [self.feature_index_list[i:(i+self.batch_size)]
                             for i in range(0,
@@ -410,6 +410,8 @@ class WorkerIO(object):
     scan_list = re.split(';', line[deepnovo_config.col_scan_list])
     ms1_list = re.split(';', line[deepnovo_config.col_ms1_list])
     assert len(scan_list) == len(ms1_list), "Error: scan_list and ms1_list not matched."
+    
+    ##TODO(m) what is scan_list and ms1_list
 
     return feature_id, feature_area, precursor_mz, precursor_charge, rt_mean, raw_sequence, scan_list, ms1_list
 

@@ -697,7 +697,7 @@ class ModelNetwork(object):
     corr = tf.divide( # [128, 26, 1]
         tf.reduce_mean(tf.multiply(ms1_profile - ms1_mean, ms2_profile - ms2_mean), axis=[2], keep_dims=True),
         tf.multiply(ms1_std, ms2_std))
-    corr = tf.squeeze(corr, axis=[2]) # [128, 26]
+    corr = tf.squeeze(corr, axis=[2]) # [128, 26] #TODO(m) look into this part
 
     # reshape [128, 26, 8*5, 10] to [128, 8, 5, 10, 26]
     # TODO(nh2tran): this can be fixed at the input process.
@@ -993,7 +993,7 @@ class ModelNetwork(object):
 
     # lstm cell's one-iteration
     with tf.variable_scope("LSTM_cell", reuse=reuse): # TODO(nh2tran): remove
-      if self.lstm_kmer: # use lstm on k-mers
+      if self.lstm_kmer: # use lstm on k-mers #TODO(m) what is lstm on k-mers
         _, lstm_state1 = cell(inputs=AA_1_project, state=input_lstm_state0)
         lstm_feature, lstm_state = cell(inputs=AA_2_project, state=lstm_state1)
       else: # use lstm on full sequence

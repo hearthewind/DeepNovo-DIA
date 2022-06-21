@@ -126,6 +126,8 @@ tf.app.flags.DEFINE_integer("multiprocessor",
                             1,
                             "Use multi processors to read data during training.")
 
+tf.app.flags.DEFINE_string('f', '', 'kernel')
+
 FLAGS = tf.app.flags.FLAGS
 
 

@@ -201,7 +201,7 @@ def read_single_spectrum(feature_index, worker_i, feature_fr, spectrum_fr):
         candidate_intensity_list_backward.append(candidate_intensity)
 
   ### assign data to buckets
-  if deepnovo_config.FLAGS.beam_search:
+  if deepnovo_config.FLAGS.beam_search: #TODO(m) what does the program do when using beam_search
     if deepnovo_config.FLAGS.direction == 0:
       data = [feature_id,
               spectrum_holder,
@@ -321,7 +321,7 @@ def read_spectra(worker_io, feature_index_list):
   del worker_i
   gc.collect()
 
-  counter_skipped_mass = worker_io.feature_count["skipped_mass"]
+  counter_skipped_mass = worker_io.feature_count["skipped_mass"] # TODO(m) this might be a bug, since it is always 0
   counter_skipped = counter_skipped_mass + counter_skipped_empty + counter_skipped_mod + counter_skipped_len
   print("  total peptide %d" % counter)
   print("    peptide read %d" % counter_read)
@@ -389,7 +389,7 @@ def get_batch_01(index_list, data_set, bucket_id):
       # The corresponding target is decoder_input shifted by 1 forward.
       if length_idx < decoder_size - 1:
         target = decoder_inputs[batch_idx][length_idx + 1]
-      # We set weight to 0 if the corresponding target is a PAD symbol.
+      # We set weight to 0 if the corresponding target is a PAD symbol. #TODO(m) why GO_ID and EOS_ID
       if (length_idx == decoder_size - 1
           or target == deepnovo_config.EOS_ID
           or target == deepnovo_config.GO_ID
@@ -684,7 +684,7 @@ def test_AA_decode_batch(scans,
 
     # print to output file
     print_AA_basic(output_file_handle,
-                   scan,
+                   scan, #TODO(m) scan is the same as feature_id here
                    decoder_input,
                    output,
                    direction,
@@ -1070,7 +1070,7 @@ def knapsack_search(knapsack_matrix, peptide_mass, mass_precision_tolerance):
 
 def knapsack_search_mass(knapsack_matrix,
                          peptide_mass,
-                         mass_precision_tolerance):
+                         mass_precision_tolerance): #TODO(m) take another look at this function
   """TODO(nh2tran): docstring."""
 
   # ~ knapsack_matrix = np.load("knapsack.npy")
@@ -1139,7 +1139,7 @@ def create_model(session, training_mode):
   return model
 
 
-def decode_true_feeding_01(sess, model, direction, data_set):
+def decode_true_feeding_01(sess, model, direction, data_set): #TODO(m) take a look at this function again
   """TODO(nh2tran): docstring."""
 
   # FORWARD/BACKWARD setting
@@ -1361,7 +1361,7 @@ def decode_beam_search_01(sess,
                           prefix_mass_list,
                           precursor_mass_precision,
                           knapsack_precision,
-                          data_set):
+                          data_set): #TODO(m) take a look at this function again
   """TODO(nh2tran): docstring."""
 
   print("decode_beam_search_01(), direction={0}".format(direction))
@@ -1773,7 +1773,7 @@ def decode_beam_search_2(sess, model, data_set, knapsack_matrix):
             seq_forward = x_path[0][1:-1]
             seq_backward = y_path[0][1:-1]
             seq_backward = seq_backward[::-1]
-            seq = seq_backward + seq_forward
+            seq = seq_backward + seq_forward #TODO(m) why seq is a combination of seq_backward and seq_forward
             score = x_path[1] + y_path[1]
             direction = candidate_mass[0][0]
             output_top_paths[spectrum_id].append([seq, score, direction])

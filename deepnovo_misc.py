@@ -304,7 +304,7 @@ def filter_multifeature(input_file):
         # average feature count of scans
         feature_count = sum([len(scan_dict[scan_id]['feature_list']) for scan_id in feature['scan_list']])
         feature_count /= float(len(feature['scan_list']))
-        if feature_count >= 2:
+        if feature_count >= 2: #TODO(m) shouldn't this be larger than 1
           output_handle = output_handle_2
           multi_feature_count += 1
           single_feature_count -= 1
